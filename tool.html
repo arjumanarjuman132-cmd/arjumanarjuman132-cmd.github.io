@@ -3,67 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urdu ⇄ English Translator - SCREAMHIVE</title>
+<title>Urdu ⇄ English Translator</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f0f4f9;padding:0;color:#1f1f1f}
-.top{background:#fff;padding:20px 15px 10px;border-radius:0 0 25px 25px}
-.top h1{text-align:center;font-size:22px;color:#000}
-.top h1 span{font-weight:normal;color:#444}
-.top p{text-align:center;color:#888;font-size:13px;margin-top:2px}
-textarea{width:100%;height:180px;border:0;outline:none;font-size:34px;font-weight:500;padding:20px 10px 10px;resize:none;background:#fff;color:#000}
-textarea::placeholder{color:#444;font-size:34px;font-weight:500}
-.paste-btn{background:#d3e3fd;color:#0b57d0;border:0;padding:10px 20px;border-radius:20px;font-size:16px;font-weight:600;margin:5px 10px;cursor:pointer}
-.lang-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;background:#f0f4f9}
-.lang-pill{background:#fff;border:0;padding:14px 20px;border-radius:15px;font-size:18px;flex:1;max-width:180px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
-.lang-pill.active{font-weight:bold}
-.swap{font-size:22px;background:none;border:0;cursor:pointer}
-.result-box{background:#fff;margin:10px 15px;padding:20px;border-radius:20px;min-height:160px;font-size:26px;line-height:1.4;white-space:pre-wrap}
-.result-label{font-size:13px;color:#888;margin:0 15px}
-.btn-row{display:flex;gap:10px;justify-content:center;margin:15px}
-.small{background:#fff;border:1px solid #ddd;padding:10px 18px;border-radius:20px;cursor:pointer;font-size:14px}
-.footer{text-align:center;color:#888;font-size:12px;padding:15px}
-.footer a{color:#0b57d0;text-decoration:none}
+body{margin:0;font-family:Arial;background:#f2f4f8;padding:15px}
+.top{text-align:center}
+.top h1{font-size:22px;margin:10px 0 0}
+.top p{color:#666;font-size:13px}
+.card{background:#fff;border-radius:15px;padding:15px;margin-top:15px;box-shadow:0 2px 10px #0001}
+textarea{width:100%;height:120px;border:0;outline:none;font-size:20px;resize:none;box-sizing:border-box}
+.result-label{font-weight:bold;margin-top:10px}
+.result-box{min-height:80px;background:#f8f9ff;border-radius:10px;padding:12px;font-size:20px;margin-top:5px;box-sizing:border-box}
+.lang-row{display:flex;justify-content:center;gap:10px;margin-top:15px;align-items:center}
+.lang-pill{border:0;background:#eef1ff;padding:10px 25px;border-radius:20px;font-weight:bold;cursor:pointer}
+.lang-pill.active{background:#6c5ce7;color:#fff}
+.swap{border:0;background:#eee;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer}
+.btn-row{display:flex;gap:10px;margin-top:15px}
+.btn-row button{flex:1;padding:12px;border:0;border-radius:10px;font-weight:bold;cursor:pointer;background:#eef1ff}
 </style>
 </head>
 <body>
-
 <div class="top">
-<h1>Google <span>Translate</span> - SCREAMHIVE</h1>
+<h1>Google Translate - SCREAMHIVE</h1>
 <p>Urdu ⇄ English - 100% Free</p>
 </div>
 
-<textarea id="inputText" placeholder="Translate text" oninput="autoTranslate()"></textarea>
-<button class="paste-btn" onclick="pasteText()">📋 Paste</button>
-
+<div class="card">
+<p>Translate text</p>
+<textarea id="inputText" placeholder="Type here..." oninput="autoTranslate()"></textarea>
+<button onclick="pasteText()">Paste</button>
 
 <p class="result-label">Translation</p>
 <div class="result-box" id="outputText"></div>
+
 <div class="lang-row">
 <button class="lang-pill active" id="btnUrdu" onclick="setLang('ur-en')">Urdu</button>
 <button class="swap" onclick="swapLang()">⇄</button>
 <button class="lang-pill" id="btnEng" onclick="setLang('en-ur')">English</button>
 </div>
+
 <div class="btn-row">
-<button class="small" onclick="copyText()">Copy</button>
-<button class="small" onclick="document.getElementById('inputText').value='';document.getElementById('outputText').innerText=''">Clear</button>
+<button onclick="copyText()">Copy</button>
+<button onclick="clearText()">Clear</button>
+</div>
 </div>
 
-
-function setLang(m){mode=m;document.getElementById('btnUrdu').classList.toggle('active',m==='ur-en');document.getElementById('btnEng').classList.toggle('active',m==='en-ur');autoTranslate();}
-function swapLang(){let a=document.getElementById('inputText').value;document.getElementById('inputText').value=document.getElementById('outputText').innerText;document.getElementById('outputText').innerText=a;setLang(mode==='ur-en'?'en-ur':'ur-en');}
-function autoTranslate(){
-  let text=document.getElementById('inputText').value.trim();
-  document.getElementById('count').innerText=text?text.split(/\s+/).length:0;
-  if(!text){document.getElementById('outputText').innerText='';return;}
-  clearTimeout(timer);
-  timer=setTimeout(async()=>{
-    let pair=mode==='ur-en'?'ur|en':'en|ur';
-    try{let r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+pair);let d=await r.json();document.getElementById('outputText').innerText=d.responseData.translatedText;}catch(e){}
-  },500);
+<script>
+let pair = "ur-en";
+function setLang(m){
+pair = m;
+document.getElementById('btnUrdu').classList.toggle('active', m==='ur-en');
+document.getElementById('btnEng').classList.toggle('active', m==='en-ur');
+autoTranslate();
 }
-function copyText(){navigator.clipboard.writeText(document.getElementById('outputText').innerText);alert('Copy ho gaya!');}
-async function pasteText(){let t=await navigator.clipboard.readText();document.getElementById('inputText').value=t;autoTranslate();}
+function swapLang(){
+pair = pair==='ur-en' ? 'en-ur' : 'ur-en';
+let a = document.getElementById('inputText').value;
+let b = document.getElementById('outputText').innerText;
+document.getElementById('inputText').value = b;
+document.getElementById('outputText').innerText = a;
+setLang(pair);
+}
+let timer;
+function autoTranslate(){
+clearTimeout(timer);
+timer = setTimeout(translateText, 500);
+}
+async function translateText(){
+let text = document.getElementById('inputText').value.trim();
+if(!text){document.getElementById('outputText').innerText="";return;}
+let s = pair.split('-');
+let langpair = s[0]+'|'+s[1];
+try{
+let res = await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+langpair);
+let data = await res.json();
+document.getElementById('outputText').innerText = data.responseData.translatedText;
+}catch(e){
+document.getElementById('outputText').innerText="Error";
+}
+}
+function copyText(){
+let t = document.getElementById('outputText').innerText;
+navigator.clipboard.writeText(t);
+alert('Copied');
+}
+function clearText(){
+document.getElementById('inputText').value="";
+document.getElementById('outputText').innerText="";
+}
+async function pasteText(){
+try{
+let t = await navigator.clipboard.readText();
+document.getElementById('inputText').value = t;
+autoTranslate();
+}catch(e){alert('Paste not allowed');}
+}
 </script>
 </body>
 </html>
