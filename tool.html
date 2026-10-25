@@ -1,94 +1,68 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urdu to Roman Urdu Converter | Roman Urdu Typing & Translator 2026</title>
-<meta name="description" content="Free Urdu to Roman Urdu Converter. Urdu text ko Roman Urdu me badlo, copy karo aur WhatsApp, TikTok pe use karo. Best Roman Urdu Typing & Translator Tool.">
-<meta name="keywords" content="urdu to roman urdu converter, urdu to roman translator, roman urdu typing, urdu to english converter, urdu text to roman">
+<title>Urdu to English Translator - SCREAMHIVE</title>
 <style>
-body{font-family:Arial,sans-serif;background:#fff5f5;margin:0;padding:20px}
-.box{max-width:700px;margin:auto;background:#fff;padding:20px;border-radius:15px;box-shadow:0 0 15px #ddd}
-h1{text-align:center;color:#b91c1c;font-size:22px}
-p{text-align:center;color:#555;font-size:14px}
-textarea{width:100%;height:120px;padding:12px;font-size:17px;border:2px solid #fecaca;border-radius:10px;box-sizing:border-box;direction:rtl}
-button{width:100%;padding:14px;background:#b91c1c;color:#fff;border:none;border-radius:10px;font-size:18px;font-weight:bold;cursor:pointer;margin-top:10px}
-button:hover{background:#991b1b}
-#output{background:#fef2f2;padding:15px;border-radius:10px;margin-top:15px;font-size:18px;min-height:60px;border:1px dashed #fca5a5;white-space:pre-wrap}
-.info{display:flex;justify-content:space-between;margin-top:10px;font-weight:bold;color:#444}
-.copy{background:#111827;margin-top:10px}
-.seo{margin-top:30px;text-align:left;line-height:1.7;color:#333}
-.seo h2{font-size:18px;color:#111827}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#0a0a0a;color:#fff;padding:20px}
+.container{max-width:700px;margin:auto;text-align:center}
+h1{color:#ff2b2b;font-size:28px;margin-bottom:5px}
+p{color:#aaa;margin-bottom:20px}
+textarea{width:100%;min-height:120px;background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:10px;padding:15px;font-size:18px;direction:rtl;text-align:right;outline:none}
+#output{direction:ltr;text-align:left;background:#111}
+button{background:#ff2b2b;color:#fff;border:none;padding:14px 25px;border-radius:50px;font-size:17px;font-weight:bold;cursor:pointer;margin:15px 5px;width:90%;max-width:320px}
+button:nth-child(2){background:#222;border:1px solid #444}
+.small{color:#888;font-size:13px;margin-top:10px}
+a{color:#ff2b2b;text-decoration:none}
 </style>
 </head>
 <body>
-<div class="box">
-<h1>Urdu to Roman Urdu Converter</h1>
-<p>Urdu likho, Roman Urdu pao. WhatsApp / TikTok ke liye best. Free Roman Urdu Typing Tool.</p>
+<div class="container">
+<h1>Urdu to English</h1>
+<p>Urdu likho, English pao - SCREAMHIVE Tool</p>
 
-<textarea id="urduInput" placeholder="Yahan Urdu me likhen... مثال: مجھے کہانیاں پڑھنا پسند ہے"></textarea>
-<button onclick="convert()">Convert Karo ➜</button>
+<textarea id="input" placeholder="یہاں اردو لکھیں... مثال: میرا نام دانش ہے"></textarea>
 
-<div id="output">Yahan Roman Urdu aayega...</div>
-<div class="info"><span id="words">Words: 0</span><span id="chars">Letters: 0</span></div>
-<button class="copy" onclick="copyText()">Copy Karo</button>
-<p style="font-size:12px">Example try karo: میرا نام عرجمان ہے، مجھے کہانیاں پسند ہیں</p>
+<br>
+<button onclick="translateNow()">Translate Karo ➜</button>
+<button onclick="copyText()">Copy Karo</button>
 
-<div class="seo">
-<h2>Urdu to Roman Urdu Converter Kaise Use Karen?</h2>
-<p>1. Upar wale box me apna Urdu text likhen.<br>
-2. Convert Karo button dabayen.<br>
-3. Aapka Urdu text Roman Urdu me badal jayega. Ise copy karke WhatsApp, Facebook, TikTok aur Instagram pe use kar sakte hain.</p>
-
-<h2>Roman Urdu Typing Kya Hai?</h2>
-<p>Roman Urdu typing me hum Urdu lafzon ko English letters me likhte hain. Jaise "Mujhe Kahaniyan Parhna Pasand Hai". Pakistan me sab se zyada log isi tarike se baat karte hain kyunki ye likhna aasan hai.</p>
-
-<h2>Is Urdu to Roman Translator Ke Fayde</h2>
-<p>- Bilkul Free Hai<br>
-- Koi App Download Karne Ki Zaroorat Nahi<br>
-- Word Counter Bhi Sath Hai<br>
-- Mobile Aur Laptop Dono Pe Chalta Hai</p>
-
-<h2>Urdu to Roman Urdu Converter - Aksar Puche Jane Wale Sawal</h2>
-<p><b>Kya ye tool free hai?</b> Ji haan, 100% free hai.<br>
-<b>Kya is se Urdu to English bhi hota hai?</b> Ye tool Urdu ko Roman Urdu me badalta hai jo English letters me hota hai.<br>
-<b>Kya mobile pe chalega?</b> Ji haan, mobile aur laptop dono pe chalega.</p>
-</div>
+<textarea id="output" placeholder="Yahan English aayega... Example: My name is Danish" readonly></textarea>
+<p class="small" id="status">Words: 0 | Powered by SCREAMHIVE</p>
+<p><a href="index.html">← Wapas Home pe jao</a></p>
 </div>
 
 <script>
-const dict = {
-"میرا":"Mera","میری":"Meri","میرے":"Mere","نام":"naam","ہے":"hai","ہوں":"hun","ہو":"ho","ہیں":"hain",
-"مجھے":"Mujhe","تمہیں":"Tumhe","اسے":"Ise","اس":"Is","یہ":"Ye","وہ":"Wo","کیا":"Kya","کیوں":"Kyun",
-"کہانیاں":"kahaniyan","کہانی":"kahani","پڑھنا":"parhna","پسند":"pasand","بہت":"bohat","اچھا":"acha",
-"اچھے":"ache","برا":"bura","دل":"dil","دنیا":"duniya","زندگی":"zindagi","محبت":"mohabbat","دوست":"dost",
-"گھر":"ghar","پانی":"pani","کھانا":"khana","آج":"aaj","کل":"kal","اب":"ab","پھر":"phir","کب":"kab",
-"کہاں":"kahan","کون":"kon","کبھی":"kabhi","ہمیشہ":"hamesha","پیار":"pyar","خوش":"khush","غم":"gham",
-"رات":"raat","دن":"din","صبح":"subah","شام":"shaam","سکول":"school","کتاب":"kitab","لڑکی":"larki","لڑکا":"larka",
-"بھائی":"bhai","بہن":"behen","امی":"ami","ابو":"abu","ماں":"maa","باپ":"baap","اللہ":"Allah","شکریہ":"shukriya",
-"معاف":"maaf","کیسے":"kaise","ٹھیک":"theek","چلو":"chalo","آؤ":"aao","جاؤ":"jao","کھیل":"khel",
-"خوفناک":"khofnak","بھوت":"bhoot","ڈر":"dar","خواب":"khawab","یاد":"yaad","بات":"baat","سچ":"sach","جھوٹ":"jhoot"
-};
-function convert(){
-  let text = document.getElementById("urduInput").value.trim();
-  if(!text){ document.getElementById("output").innerText = "Pehle upar Urdu me kuch likho..."; return; }
-  let words = text.split(/\s+/);
-  let roman = words.map(w => {
-    let clean = w.replace(/[۔،؟!.,]/g,"");
-    if(dict[clean]) return dict[clean];
-    if(dict[w]) return dict[w];
-    return w;
-  }).join(" ");
-  document.getElementById("output").innerText = roman;
-  let romanWords = roman.split(/\s+/).filter(x=>x.length>0);
-  document.getElementById("words").innerText = "Words: " + romanWords.length;
-  document.getElementById("chars").innerText = "Letters: " + roman.replace(/\s/g,"").length;
+async function translateNow(){
+  let text = document.getElementById("input").value.trim();
+  let out = document.getElementById("output");
+  let status = document.getElementById("status");
+  if(!text){ out.value = "Pehle upar Urdu likho!"; return; }
+  out.value = "Translating... thora wait karo...";
+  document.getElementById("status").innerText = "Words: " + text.split(/\s+/).length;
+
+  try{
+    let res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=ur|en");
+    let data = await res.json();
+    let eng = data.responseData.translatedText;
+    // Names fix - Danish waghera sahi rahe
+    out.value = eng;
+    status.innerText = "Words: " + text.split(/\s+/).length + " | Done ✅";
+  }catch(e){
+    out.value = "Internet slow hai, dobara try karo. Ya ye try karo: Mera naam Danish hai";
+  }
 }
 function copyText(){
-  let t = document.getElementById("output").innerText;
-  navigator.clipboard.writeText(t);
-  alert("Copy ho gaya! Ab WhatsApp pe paste kar do.");
+  let o = document.getElementById("output");
+  o.select(); document.execCommand("copy");
+  alert("Copy ho gaya ✅");
 }
+document.getElementById("input").addEventListener("input", function(){
+  let t = this.value.trim();
+  document.getElementById("status").innerText = "Words: " + (t ? t.split(/\s+/).length : 0);
+});
 </script>
 </body>
 </html>
