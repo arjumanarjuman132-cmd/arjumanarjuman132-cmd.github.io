@@ -1,10 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urdu ⇄ English Translator - SCREAMHIVE</title>
+<title>Urdu to English Translator - Free English to Urdu Translator | SCREAMHIVE</title>
+<meta name="description" content="Free Urdu to English Translator and English to Urdu Translator. Translate Urdu to English and English to Urdu instantly. Best free online translator in Pakistan.">
+<meta name="keywords" content="Urdu to English Translator, English to Urdu Translator, Free Translator, Urdu English Translate, Translate Urdu to English, Urdu Translator Online, SCREAMHIVE">
+<meta property="og:title" content="Urdu to English Translator - Free | SCREAMHIVE">
+<meta property="og:description" content="Translate Urdu to English and English to Urdu Free. Fast, Easy, 50000 Limit. Install App Free.">
 <meta name="theme-color" content="#0a0a0a">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
@@ -22,6 +25,7 @@ textarea{width:100%;min-height:120px;background:#1a1a1a;color:#fff;border:1px so
 .btn2{background:#222;border:1px solid #444;color:#fff;padding:12px 20px;border-radius:50px;cursor:pointer;margin:5px}
 .install{background:#25D366;color:#fff;border:none;padding:13px 22px;border-radius:50px;font-weight:bold;cursor:pointer;margin:10px 5px;font-size:15px}
 .small{color:#888;font-size:13px;margin-top:10px}
+.seo{color:#555;font-size:12px;margin-top:20px;line-height:1.6}
 a{color:#ff2b2b;text-decoration:none}
 </style>
 </head>
@@ -38,15 +42,17 @@ a{color:#ff2b2b;text-decoration:none}
 <button id="btnEnUr" onclick="setMode('en-ur')">English ➜ Urdu</button>
 </div>
 
-<textarea id="input" placeholder="یہاں اردو لکھیں... مثال: میرا نام دانش ہے"></textarea>
+<textarea id="input" placeholder=""></textarea>
 <br>
 <button class="btn" onclick="translateNow()">Translate Now ➜</button><br>
 <button class="btn2" onclick="swapMode()">⇄ Swap</button>
 <button class="btn2" onclick="copyText()">Copy Text</button>
 
-<textarea id="output" placeholder="English will appear here... Example: My name is Danish" readonly></textarea>
-<p class="small" id="status">Words: 0 | SCREAMHIVE</p>
+<textarea id="output" placeholder="" readonly></textarea>
+<p class="small" id="status">Words: 0 | SCREAMHIVE | 50,000 Limit</p>
 <p><a href="index.html">← Back to Home</a></p>
+
+<p class="seo">Best Free Urdu to English Translator and English to Urdu Translator Online. Translate Urdu to English sentences, words and paragraphs instantly. Fast Urdu English Translate tool for Pakistan, India. Free online translator, no sign up needed.</p>
 </div>
 
 <script>
@@ -75,17 +81,17 @@ function setMode(m){
   let out = document.getElementById("output");
   if(m==='ur-en'){
     inp.style.direction='rtl'; inp.style.textAlign='right';
-    inp.placeholder='یہاں اردو لکھیں... مثال: میرا نام دانش ہے';
-    out.placeholder='English will appear here... Example: My name is Danish';
+    inp.placeholder='';
+    out.placeholder='';
     out.style.direction='ltr'; out.style.textAlign='left';
   }else{
     inp.style.direction='ltr'; inp.style.textAlign='left';
-    inp.placeholder='Write English here... Example: My name is Danish';
-    out.placeholder='Urdu yahan aayega... Misal: میرا نام دانش ہے';
+    inp.placeholder='';
+    out.placeholder='';
     out.style.direction='rtl'; out.style.textAlign='right';
   }
   inp.value=''; out.value='';
-  document.getElementById("status").innerText='Words: 0 | SCREAMHIVE';
+  document.getElementById("status").innerText='Words: 0 | SCREAMHIVE | 50,000 Limit';
 }
 function swapMode(){ setMode(mode==='ur-en' ? 'en-ur' : 'ur-en'); }
 async function translateNow(){
@@ -94,11 +100,12 @@ async function translateNow(){
   if(!text){ out.value = mode==='ur-en' ? "Please write Urdu first!" : "Please write English first!"; return; }
   out.value = "Translating... Please wait...";
   let pair = mode==='ur-en' ? "ur|en" : "en|ur";
+  let myEmail = "arjumanarjuman132@gmail.com";
   try{
-    let res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=" + pair);
+    let res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=" + pair + "&de=" + myEmail);
     let data = await res.json();
     out.value = data.responseData.translatedText;
-    document.getElementById("status").innerText = "Words: " + text.split(/\s+/).length + " | Done ✅";
+    document.getElementById("status").innerText = "Words: " + text.split(/\s+/).length + " | Done ✅ | 50,000 Limit";
   }catch(e){ out.value = "Internet is slow, try again."; }
 }
 function copyText(){
