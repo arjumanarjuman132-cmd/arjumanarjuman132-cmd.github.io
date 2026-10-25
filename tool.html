@@ -1,70 +1,74 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urdu ⇄ English Translator - SCREAMHIVE | 100% Free</title>
-<meta name="description" content="Free Urdu to English Translator and English to Urdu Translator Online. Translate Both Ways - 100% Free.">
+<title>Urdu ⇄ English Translator - SCREAMHIVE</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#111;color:#fff;padding:15px}
-h1{color:#ff2a2a;text-align:center;font-size:26px}
-p.sub{text-align:center;color:#aaa;margin:5px 0 15px}
-.install{display:block;width:200px;margin:0 auto 20px;background:#00c853;color:#fff;text-align:center;padding:10px;border-radius:25px;font-weight:bold;text-decoration:none}
-.lang-box{background:#fff;border-radius:30px;display:flex;align-items:center;justify-content:space-between;padding:6px;margin-bottom:15px}
-.lang-btn{flex:1;background:#f1f1f1;border:0;padding:12px;border-radius:25px;font-size:16px;font-weight:bold;cursor:pointer;color:#333}
-.lang-btn.active{background:#111;color:#fff}
-.swap-btn{background:#ff2a2a;color:#fff;border:0;width:42px;height:42px;border-radius:50%;font-size:20px;margin:0 8px;cursor:pointer}
-textarea{width:100%;height:160px;background:#1e1e1e;color:#fff;border:2px solid #333;border-radius:15px;padding:15px;font-size:20px;outline:none;resize:none}
-textarea::placeholder{color:#888;font-size:22px}
-.output{width:100%;min-height:140px;background:#1e1e1e;border:2px solid #00c853;border-radius:15px;padding:15px;font-size:20px;margin-top:15px;white-space:pre-wrap}
-.translate-btn{width:100%;background:#ff2a2a;color:#fff;border:0;padding:15px;border-radius:30px;font-size:18px;font-weight:bold;margin-top:15px;cursor:pointer}
-.row{display:flex;gap:10px;margin-top:12px;justify-content:center}
-.small{background:#222;color:#fff;border:1px solid #444;padding:10px 18px;border-radius:20px;cursor:pointer}
-.footer{text-align:center;color:#777;margin-top:20px;font-size:13px}
-.footer a{color:#ff2a2a;text-decoration:none;margin:0 5px}
+body{background:#f0f4f9;padding:0;color:#1f1f1f}
+.top{background:#fff;padding:20px 15px 10px;border-radius:0 0 25px 25px}
+.top h1{text-align:center;font-size:22px;color:#000}
+.top h1 span{font-weight:normal;color:#444}
+.top p{text-align:center;color:#888;font-size:13px;margin-top:2px}
+textarea{width:100%;height:180px;border:0;outline:none;font-size:34px;font-weight:500;padding:20px 10px 10px;resize:none;background:#fff;color:#000}
+textarea::placeholder{color:#444;font-size:34px;font-weight:500}
+.paste-btn{background:#d3e3fd;color:#0b57d0;border:0;padding:10px 20px;border-radius:20px;font-size:16px;font-weight:600;margin:5px 10px;cursor:pointer}
+.lang-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;background:#f0f4f9}
+.lang-pill{background:#fff;border:0;padding:14px 20px;border-radius:15px;font-size:18px;flex:1;max-width:180px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.lang-pill.active{font-weight:bold}
+.swap{font-size:22px;background:none;border:0;cursor:pointer}
+.result-box{background:#fff;margin:10px 15px;padding:20px;border-radius:20px;min-height:160px;font-size:26px;line-height:1.4;white-space:pre-wrap}
+.result-label{font-size:13px;color:#888;margin:0 15px}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:15px}
+.small{background:#fff;border:1px solid #ddd;padding:10px 18px;border-radius:20px;cursor:pointer;font-size:14px}
+.footer{text-align:center;color:#888;font-size:12px;padding:15px}
+.footer a{color:#0b57d0;text-decoration:none}
 </style>
 </head>
 <body>
 
-<h1>Urdu ⇄ English Translator</h1>
-<p class="sub">Translate Both Ways - 100% Free</p>
-<a class="install" href="#">📱 Install App - Free</a>
-
-<div class="lang-box">
-  <button class="lang-btn active" id="btnUrdu" onclick="setLang('ur-en')">Urdu</button>
-  <button class="swap-btn" onclick="swapLang()">⇄</button>
-  <button class="lang-btn" id="btnEng" onclick="setLang('en-ur')">English</button>
+<div class="top">
+<h1>Google <span>Translate</span> - SCREAMHIVE</h1>
+<p>Urdu ⇄ English - 100% Free</p>
 </div>
 
-<textarea id="inputText" placeholder="Translate text"></textarea>
-<button class="translate-btn" onclick="translateNow()">Translate Now ➔</button>
-<div class="output" id="outputText">Translation yahan aayega...</div>
+<textarea id="inputText" placeholder="Translate text" oninput="autoTranslate()"></textarea>
+<button class="paste-btn" onclick="pasteText()">📋 Paste</button>
 
-<div class="row">
-  <button class="small" onclick="swapLang()">⇄ Swap</button>
-  <button class="small" onclick="copyText()">Copy Text</button>
-  <button class="small" onclick="pasteText()">Paste</button>
+<div class="lang-row">
+<button class="lang-pill active" id="btnUrdu" onclick="setLang('ur-en')">Urdu</button>
+<button class="swap" onclick="swapLang()">⇄</button>
+<button class="lang-pill" id="btnEng" onclick="setLang('en-ur')">English</button>
 </div>
 
-<p class="footer">Words: <span id="count">0</span> | SCREAMHIVE | 50,000 Limit<br><br>
-<a href="index.html">← Back to Home</a> | <a href="privacy.html">Privacy Policy</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></p>
+<p class="result-label">Translation</p>
+<div class="result-box" id="outputText"></div>
+
+<div class="btn-row">
+<button class="small" onclick="copyText()">Copy</button>
+<button class="small" onclick="document.getElementById('inputText').value='';document.getElementById('outputText').innerText=''">Clear</button>
+</div>
+
+<p class="footer">Words: <span id="count">0</span> | SCREAMHIVE | <a href="index.html">Home</a> | <a href="privacy.html">Privacy</a></p>
 
 <script>
 let mode='ur-en';
-function setLang(m){mode=m;document.getElementById('btnUrdu').classList.toggle('active',m==='ur-en');document.getElementById('btnEng').classList.toggle('active',m==='en-ur');document.getElementById('inputText').placeholder=m==='ur-en'?'Translate text - Urdu likhein':'Translate text - English likhein';}
+let timer;
+function setLang(m){mode=m;document.getElementById('btnUrdu').classList.toggle('active',m==='ur-en');document.getElementById('btnEng').classList.toggle('active',m==='en-ur');autoTranslate();}
 function swapLang(){setLang(mode==='ur-en'?'en-ur':'ur-en');}
-async function translateNow(){
+function autoTranslate(){
   let text=document.getElementById('inputText').value.trim();
-  if(!text) return alert('Pehle kuch likhein!');
-  document.getElementById('outputText').innerText='Translating...';
-  let pair=mode==='ur-en'?'ur|en':'en|ur';
-  try{let res=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+pair);let data=await res.json();document.getElementById('outputText').innerText=data.responseData.translatedText;}catch(e){document.getElementById('outputText').innerText='Error, dobara try karein';}
+  document.getElementById('count').innerText=text?text.split(/\s+/).length:0;
+  if(!text){document.getElementById('outputText').innerText='';return;}
+  clearTimeout(timer);
+  timer=setTimeout(async()=>{
+    let pair=mode==='ur-en'?'ur|en':'en|ur';
+    try{let r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+pair);let d=await r.json();document.getElementById('outputText').innerText=d.responseData.translatedText;}catch(e){}
+  },500);
 }
 function copyText(){navigator.clipboard.writeText(document.getElementById('outputText').innerText);alert('Copy ho gaya!');}
-async function pasteText(){let t=await navigator.clipboard.readText();document.getElementById('inputText').value=t;}
-document.getElementById('inputText').addEventListener('input',e=>{document.getElementById('count').innerText=e.target.value.trim()?e.target.value.trim().split(/\s+/).length:0;});
+async function pasteText(){let t=await navigator.clipboard.readText();document.getElementById('inputText').value=t;autoTranslate();}
 </script>
 </body>
 </html>
