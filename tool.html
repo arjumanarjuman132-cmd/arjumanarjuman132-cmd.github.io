@@ -36,27 +36,22 @@ textarea::placeholder{color:#444;font-size:34px;font-weight:500}
 <textarea id="inputText" placeholder="Translate text" oninput="autoTranslate()"></textarea>
 <button class="paste-btn" onclick="pasteText()">📋 Paste</button>
 
+
+<p class="result-label">Translation</p>
+<div class="result-box" id="outputText"></div>
 <div class="lang-row">
 <button class="lang-pill active" id="btnUrdu" onclick="setLang('ur-en')">Urdu</button>
 <button class="swap" onclick="swapLang()">⇄</button>
 <button class="lang-pill" id="btnEng" onclick="setLang('en-ur')">English</button>
 </div>
-
-<p class="result-label">Translation</p>
-<div class="result-box" id="outputText"></div>
-
 <div class="btn-row">
 <button class="small" onclick="copyText()">Copy</button>
 <button class="small" onclick="document.getElementById('inputText').value='';document.getElementById('outputText').innerText=''">Clear</button>
 </div>
 
-<p class="footer">Words: <span id="count">0</span> | SCREAMHIVE | <a href="index.html">Home</a> | <a href="privacy.html">Privacy</a></p>
 
-<script>
-let mode='ur-en';
-let timer;
 function setLang(m){mode=m;document.getElementById('btnUrdu').classList.toggle('active',m==='ur-en');document.getElementById('btnEng').classList.toggle('active',m==='en-ur');autoTranslate();}
-function swapLang(){setLang(mode==='ur-en'?'en-ur':'ur-en');}
+function swapLang(){let a=document.getElementById('inputText').value;document.getElementById('inputText').value=document.getElementById('outputText').innerText;document.getElementById('outputText').innerText=a;setLang(mode==='ur-en'?'en-ur':'ur-en');}
 function autoTranslate(){
   let text=document.getElementById('inputText').value.trim();
   document.getElementById('count').innerText=text?text.split(/\s+/).length:0;
