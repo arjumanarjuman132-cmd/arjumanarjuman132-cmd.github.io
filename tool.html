@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urdu <> English Translator - SCREAMHIVE</title>
+<title>Urdu ⇄ English Translator - SCREAMHIVE</title>
+<meta name="theme-color" content="#0a0a0a">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#0a0a0a;color:#fff;padding:20px}
@@ -18,6 +20,7 @@ textarea{width:100%;min-height:120px;background:#1a1a1a;color:#fff;border:1px so
 #output{background:#111}
 .btn{background:#ff2b2b;color:#fff;border:none;padding:14px 25px;border-radius:50px;font-size:17px;font-weight:bold;cursor:pointer;margin:15px 5px;width:90%;max-width:320px}
 .btn2{background:#222;border:1px solid #444;color:#fff;padding:12px 20px;border-radius:50px;cursor:pointer;margin:5px}
+.install{background:#25D366;color:#fff;border:none;padding:13px 22px;border-radius:50px;font-weight:bold;cursor:pointer;margin:10px 5px;font-size:15px}
 .small{color:#888;font-size:13px;margin-top:10px}
 a{color:#ff2b2b;text-decoration:none}
 </style>
@@ -25,7 +28,10 @@ a{color:#ff2b2b;text-decoration:none}
 <body>
 <div class="container">
 <h1>Urdu ⇄ English Translator</h1>
-<p>Ab dono taraf tarjuma karo - Bilkul Free</p>
+<p>Translate Both Ways - 100% Free</p>
+
+<button class="install" id="installBtn" onclick="installApp()">📲 Install App - Free</button>
+<p class="small">Install it once, no need to open link again</p>
 
 <div class="switch">
 <button id="btnUrEn" class="active" onclick="setMode('ur-en')">Urdu ➜ English</button>
@@ -34,17 +40,33 @@ a{color:#ff2b2b;text-decoration:none}
 
 <textarea id="input" placeholder="یہاں اردو لکھیں... مثال: میرا نام دانش ہے"></textarea>
 <br>
-<button class="btn" onclick="translateNow()">Translate Karo ➜</button><br>
-<button class="btn2" onclick="swapMode()">⇄ Ulta Karo</button>
-<button class="btn2" onclick="copyText()">Copy Karo</button>
+<button class="btn" onclick="translateNow()">Translate Now ➜</button><br>
+<button class="btn2" onclick="swapMode()">⇄ Swap</button>
+<button class="btn2" onclick="copyText()">Copy Text</button>
 
-<textarea id="output" placeholder="Yahan English aayega... Example: My name is Danish" readonly></textarea>
+<textarea id="output" placeholder="English will appear here... Example: My name is Danish" readonly></textarea>
 <p class="small" id="status">Words: 0 | SCREAMHIVE</p>
-<p><a href="index.html">← Wapas Home pe jao</a></p>
+<p><a href="index.html">← Back to Home</a></p>
 </div>
 
 <script>
 let mode = 'ur-en';
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById("installBtn").innerText = "📲 Install App - Tap Now!";
+});
+async function installApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    let choice = await deferredPrompt.userChoice;
+    if(choice.outcome==='accepted'){ alert("Congratulations! App Installed ✅ Check Home Screen"); }
+    deferredPrompt = null;
+  }else{
+    alert("Tap 3 dots ( ⋮ ) on top > Add to Home Screen / Install App. Your SCREAMHIVE App will be created ✅");
+  }
+}
 function setMode(m){
   mode = m;
   document.getElementById("btnUrEn").classList.toggle("active", m==='ur-en');
@@ -54,39 +76,35 @@ function setMode(m){
   if(m==='ur-en'){
     inp.style.direction='rtl'; inp.style.textAlign='right';
     inp.placeholder='یہاں اردو لکھیں... مثال: میرا نام دانش ہے';
-    out.placeholder='Yahan English aayega... Example: My name is Danish';
+    out.placeholder='English will appear here... Example: My name is Danish';
     out.style.direction='ltr'; out.style.textAlign='left';
   }else{
     inp.style.direction='ltr'; inp.style.textAlign='left';
     inp.placeholder='Write English here... Example: My name is Danish';
-    out.placeholder='Yahan Urdu aayega... Misal: میرا نام دانش ہے';
+    out.placeholder='Urdu yahan aayega... Misal: میرا نام دانش ہے';
     out.style.direction='rtl'; out.style.textAlign='right';
   }
   inp.value=''; out.value='';
   document.getElementById("status").innerText='Words: 0 | SCREAMHIVE';
 }
-function swapMode(){
-  setMode(mode==='ur-en' ? 'en-ur' : 'ur-en');
-}
+function swapMode(){ setMode(mode==='ur-en' ? 'en-ur' : 'ur-en'); }
 async function translateNow(){
   let text = document.getElementById("input").value.trim();
   let out = document.getElementById("output");
-  if(!text){ out.value = mode==='ur-en' ? "Pehle upar Urdu likho!" : "Pehle upar English likho!"; return; }
-  out.value = "Translating... thora wait karo...";
+  if(!text){ out.value = mode==='ur-en' ? "Please write Urdu first!" : "Please write English first!"; return; }
+  out.value = "Translating... Please wait...";
   let pair = mode==='ur-en' ? "ur|en" : "en|ur";
   try{
     let res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=" + pair);
     let data = await res.json();
     out.value = data.responseData.translatedText;
     document.getElementById("status").innerText = "Words: " + text.split(/\s+/).length + " | Done ✅";
-  }catch(e){
-    out.value = "Internet slow hai, dobara try karo.";
-  }
+  }catch(e){ out.value = "Internet is slow, try again."; }
 }
 function copyText(){
   let o = document.getElementById("output");
   o.select(); document.execCommand("copy");
-  alert("Copy ho gaya ✅");
+  alert("Copied ✅");
 }
 document.getElementById("input").addEventListener("input", function(){
   let t = this.value.trim();
