@@ -1,122 +1,70 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urdu to English Translator - Free English to Urdu Translator | SCREAMHIVE</title>
-<meta name="description" content="Free Urdu to English Translator and English to Urdu Translator. Translate Urdu to English and English to Urdu instantly. Best free online translator in Pakistan.">
-<meta name="keywords" content="Urdu to English Translator, English to Urdu Translator, Free Translator, Urdu English Translate, Translate Urdu to English, Urdu Translator Online, SCREAMHIVE">
-<meta property="og:title" content="Urdu to English Translator - Free | SCREAMHIVE">
-<meta property="og:description" content="Translate Urdu to English and English to Urdu Free. Fast, Easy, 50000 Limit. Install App Free.">
-<meta name="theme-color" content="#0a0a0a">
+<title>Urdu ⇄ English Translator - SCREAMHIVE | 100% Free</title>
+<meta name="description" content="Free Urdu to English Translator and English to Urdu Translator Online. Translate Both Ways - 100% Free.">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#0a0a0a;color:#fff;padding:20px}
-.container{max-width:700px;margin:auto;text-align:center}
-h1{color:#ff2b2b;font-size:26px;margin-bottom:5px}
-p{color:#aaa;margin-bottom:15px}
-.switch{display:flex;gap:10px;justify-content:center;margin-bottom:15px}
-.switch button{padding:12px 18px;border-radius:50px;border:1px solid #444;background:#222;color:#fff;cursor:pointer;font-weight:bold;font-size:14px;width:auto}
-.switch button.active{background:#ff2b2b;border-color:#ff2b2b}
-textarea{width:100%;min-height:120px;background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:10px;padding:15px;font-size:18px;outline:none}
-#input{direction:rtl;text-align:right}
-#output{background:#111}
-.btn{background:#ff2b2b;color:#fff;border:none;padding:14px 25px;border-radius:50px;font-size:17px;font-weight:bold;cursor:pointer;margin:15px 5px;width:90%;max-width:320px}
-.btn2{background:#222;border:1px solid #444;color:#fff;padding:12px 20px;border-radius:50px;cursor:pointer;margin:5px}
-.install{background:#25D366;color:#fff;border:none;padding:13px 22px;border-radius:50px;font-weight:bold;cursor:pointer;margin:10px 5px;font-size:15px}
-.small{color:#888;font-size:13px;margin-top:10px}
-.seo{color:#555;font-size:12px;margin-top:20px;line-height:1.6}
-a{color:#ff2b2b;text-decoration:none}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#111;color:#fff;padding:15px}
+h1{color:#ff2a2a;text-align:center;font-size:26px}
+p.sub{text-align:center;color:#aaa;margin:5px 0 15px}
+.install{display:block;width:200px;margin:0 auto 20px;background:#00c853;color:#fff;text-align:center;padding:10px;border-radius:25px;font-weight:bold;text-decoration:none}
+.lang-box{background:#fff;border-radius:30px;display:flex;align-items:center;justify-content:space-between;padding:6px;margin-bottom:15px}
+.lang-btn{flex:1;background:#f1f1f1;border:0;padding:12px;border-radius:25px;font-size:16px;font-weight:bold;cursor:pointer;color:#333}
+.lang-btn.active{background:#111;color:#fff}
+.swap-btn{background:#ff2a2a;color:#fff;border:0;width:42px;height:42px;border-radius:50%;font-size:20px;margin:0 8px;cursor:pointer}
+textarea{width:100%;height:160px;background:#1e1e1e;color:#fff;border:2px solid #333;border-radius:15px;padding:15px;font-size:20px;outline:none;resize:none}
+textarea::placeholder{color:#888;font-size:22px}
+.output{width:100%;min-height:140px;background:#1e1e1e;border:2px solid #00c853;border-radius:15px;padding:15px;font-size:20px;margin-top:15px;white-space:pre-wrap}
+.translate-btn{width:100%;background:#ff2a2a;color:#fff;border:0;padding:15px;border-radius:30px;font-size:18px;font-weight:bold;margin-top:15px;cursor:pointer}
+.row{display:flex;gap:10px;margin-top:12px;justify-content:center}
+.small{background:#222;color:#fff;border:1px solid #444;padding:10px 18px;border-radius:20px;cursor:pointer}
+.footer{text-align:center;color:#777;margin-top:20px;font-size:13px}
+.footer a{color:#ff2a2a;text-decoration:none;margin:0 5px}
 </style>
 </head>
 <body>
-<div class="container">
+
 <h1>Urdu ⇄ English Translator</h1>
-<p>Translate Both Ways - 100% Free</p>
+<p class="sub">Translate Both Ways - 100% Free</p>
+<a class="install" href="#">📱 Install App - Free</a>
 
-<button class="install" id="installBtn" onclick="installApp()">📲 Install App - Free</button>
-<p class="small">Install it once, no need to open link again</p>
-
-<div class="switch">
-<button id="btnUrEn" class="active" onclick="setMode('ur-en')">Urdu ➜ English</button>
-<button id="btnEnUr" onclick="setMode('en-ur')">English ➜ Urdu</button>
+<div class="lang-box">
+  <button class="lang-btn active" id="btnUrdu" onclick="setLang('ur-en')">Urdu</button>
+  <button class="swap-btn" onclick="swapLang()">⇄</button>
+  <button class="lang-btn" id="btnEng" onclick="setLang('en-ur')">English</button>
 </div>
 
-<textarea id="input" placeholder=""></textarea>
-<br>
-<button class="btn" onclick="translateNow()">Translate Now ➜</button><br>
-<button class="btn2" onclick="swapMode()">⇄ Swap</button>
-<button class="btn2" onclick="copyText()">Copy Text</button>
+<textarea id="inputText" placeholder="Translate text"></textarea>
+<button class="translate-btn" onclick="translateNow()">Translate Now ➔</button>
+<div class="output" id="outputText">Translation yahan aayega...</div>
 
-<textarea id="output" placeholder="" readonly></textarea>
-<p class="small" id="status">Words: 0 | SCREAMHIVE | 50,000 Limit</p>
-<p><a href="index.html">← Back to Home</a></p>
-
-<p class="seo">Best Free Urdu to English Translator and English to Urdu Translator Online. Translate Urdu to English sentences, words and paragraphs instantly. Fast Urdu English Translate tool for Pakistan, India. Free online translator, no sign up needed.</p>
+<div class="row">
+  <button class="small" onclick="swapLang()">⇄ Swap</button>
+  <button class="small" onclick="copyText()">Copy Text</button>
+  <button class="small" onclick="pasteText()">Paste</button>
 </div>
+
+<p class="footer">Words: <span id="count">0</span> | SCREAMHIVE | 50,000 Limit<br><br>
+<a href="index.html">← Back to Home</a> | <a href="privacy.html">Privacy Policy</a> | <a href="about.html">About</a> | <a href="contact.html">Contact</a></p>
 
 <script>
-let mode = 'ur-en';
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e)=>{
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById("installBtn").innerText = "📲 Install App - Tap Now!";
-});
-async function installApp(){
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    let choice = await deferredPrompt.userChoice;
-    if(choice.outcome==='accepted'){ alert("Congratulations! App Installed ✅ Check Home Screen"); }
-    deferredPrompt = null;
-  }else{
-    alert("Tap 3 dots ( ⋮ ) on top > Add to Home Screen / Install App. Your SCREAMHIVE App will be created ✅");
-  }
-}
-function setMode(m){
-  mode = m;
-  document.getElementById("btnUrEn").classList.toggle("active", m==='ur-en');
-  document.getElementById("btnEnUr").classList.toggle("active", m==='en-ur');
-  let inp = document.getElementById("input");
-  let out = document.getElementById("output");
-  if(m==='ur-en'){
-    inp.style.direction='rtl'; inp.style.textAlign='right';
-    inp.placeholder='';
-    out.placeholder='';
-    out.style.direction='ltr'; out.style.textAlign='left';
-  }else{
-    inp.style.direction='ltr'; inp.style.textAlign='left';
-    inp.placeholder='';
-    out.placeholder='';
-    out.style.direction='rtl'; out.style.textAlign='right';
-  }
-  inp.value=''; out.value='';
-  document.getElementById("status").innerText='Words: 0 | SCREAMHIVE | 50,000 Limit';
-}
-function swapMode(){ setMode(mode==='ur-en' ? 'en-ur' : 'ur-en'); }
+let mode='ur-en';
+function setLang(m){mode=m;document.getElementById('btnUrdu').classList.toggle('active',m==='ur-en');document.getElementById('btnEng').classList.toggle('active',m==='en-ur');document.getElementById('inputText').placeholder=m==='ur-en'?'Translate text - Urdu likhein':'Translate text - English likhein';}
+function swapLang(){setLang(mode==='ur-en'?'en-ur':'ur-en');}
 async function translateNow(){
-  let text = document.getElementById("input").value.trim();
-  let out = document.getElementById("output");
-  if(!text){ out.value = mode==='ur-en' ? "Please write Urdu first!" : "Please write English first!"; return; }
-  out.value = "Translating... Please wait...";
-  let pair = mode==='ur-en' ? "ur|en" : "en|ur";
-  let myEmail = "arjumanarjuman132@gmail.com";
-  try{
-    let res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=" + pair + "&de=" + myEmail);
-    let data = await res.json();
-    out.value = data.responseData.translatedText;
-    document.getElementById("status").innerText = "Words: " + text.split(/\s+/).length + " | Done ✅ | 50,000 Limit";
-  }catch(e){ out.value = "Internet is slow, try again."; }
+  let text=document.getElementById('inputText').value.trim();
+  if(!text) return alert('Pehle kuch likhein!');
+  document.getElementById('outputText').innerText='Translating...';
+  let pair=mode==='ur-en'?'ur|en':'en|ur';
+  try{let res=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+pair);let data=await res.json();document.getElementById('outputText').innerText=data.responseData.translatedText;}catch(e){document.getElementById('outputText').innerText='Error, dobara try karein';}
 }
-function copyText(){
-  let o = document.getElementById("output");
-  o.select(); document.execCommand("copy");
-  alert("Copied ✅");
-}
-document.getElementById("input").addEventListener("input", function(){
-  let t = this.value.trim();
-  document.getElementById("status").innerText = "Words: " + (t ? t.split(/\s+/).length : 0);
-});
+function copyText(){navigator.clipboard.writeText(document.getElementById('outputText').innerText);alert('Copy ho gaya!');}
+async function pasteText(){let t=await navigator.clipboard.readText();document.getElementById('inputText').value=t;}
+document.getElementById('inputText').addEventListener('input',e=>{document.getElementById('count').innerText=e.target.value.trim()?e.target.value.trim().split(/\s+/).length:0;});
 </script>
 </body>
 </html>
