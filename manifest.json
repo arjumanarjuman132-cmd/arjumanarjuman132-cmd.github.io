@@ -1,0 +1,15 @@
+{
+  "name": "Urdu English Translator",
+  "short_name": "Translator",
+  "start_url": "tool.html",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
